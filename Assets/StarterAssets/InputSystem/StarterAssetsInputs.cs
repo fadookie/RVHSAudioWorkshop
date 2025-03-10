@@ -12,6 +12,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool shield;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -43,6 +44,18 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+		
+		public void OnShield(InputValue value)
+		{
+			Debug.LogWarning($"OnShield:{value} isPressed:{value.isPressed}");
+			ShieldInput(value.isPressed);
+		}
+
+		public void OnCancel(InputValue value)
+		{
+			Debug.LogWarning($"OnCancel:{value} isPressed:{value.isPressed}");
+			ShieldInput(value.isPressed);
+		}
 #endif
 
 
@@ -64,6 +77,11 @@ namespace StarterAssets
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
+		}
+		
+		public void ShieldInput(bool newShieldState)
+		{
+			shield = newShieldState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

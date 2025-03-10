@@ -86,6 +86,7 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private bool _shieldEnabled = false;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -159,6 +160,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Shield();
         }
 
         private void LateUpdate()
@@ -345,6 +347,16 @@ namespace StarterAssets
             if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
+            }
+        }
+
+        private void Shield()
+        {
+            // Debug.Log($"Sheild:{_shieldEnabled} input:{_input.shield}");
+            if (_shieldEnabled != _input.shield)
+            {
+                Debug.LogWarning($"Toggle shield:{_input.shield}");
+                _shieldEnabled = _input.shield;
             }
         }
 
