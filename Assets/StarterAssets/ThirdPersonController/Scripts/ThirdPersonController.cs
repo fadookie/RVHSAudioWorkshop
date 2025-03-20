@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿ using System.Collections;
+ using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -86,7 +87,12 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
-        private bool _shieldEnabled = false;
+        
+        // Shield
+        [Header("Shield")]
+        [SerializeField] private float _shieldDuration = 1f;
+        [SerializeField] private GameObject _shieldModel;
+        private Coroutine _shieldCo;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -353,11 +359,21 @@ namespace StarterAssets
         private void Shield()
         {
             // Debug.Log($"Sheild:{_shieldEnabled} input:{_input.shield}");
-            if (_shieldEnabled != _input.shield)
+            if (_shieldCo == null && _input.shield)
             {
-                Debug.LogWarning($"Toggle shield:{_input.shield}");
-                _shieldEnabled = _input.shield;
+                _shieldCo = StartCoroutine(ShieldCo());
             }
+        }
+
+        private IEnumerator ShieldCo()
+        {
+            Debug.Log($"Start shield coroutine");
+            _shieldModel.SetActive(true);
+            // TODO: Play sound
+            yield return new WaitForSeconds(_shieldDuration);
+            _shieldModel.SetActive(false);
+            _input.shield = false;
+            _shieldCo = null;
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

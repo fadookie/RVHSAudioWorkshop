@@ -37,6 +37,7 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
+			Debug.LogWarning($"OnJump:{value.isPressed}");
 			JumpInput(value.isPressed);
 		}
 
@@ -47,15 +48,15 @@ namespace StarterAssets
 		
 		public void OnShield(InputValue value)
 		{
-			Debug.LogWarning($"OnShield:{value} isPressed:{value.isPressed}");
+			Debug.Log($"OnShield:{value} isPressed:{value.isPressed}");
 			ShieldInput(value.isPressed);
 		}
 
-		public void OnCancel(InputValue value)
-		{
-			Debug.LogWarning($"OnCancel:{value} isPressed:{value.isPressed}");
-			ShieldInput(value.isPressed);
-		}
+		// public void OnCancel(InputValue value)
+		// {
+		// 	Debug.LogWarning($"OnCancel:{value} isPressed:{value.isPressed}");
+		// 	ShieldInput(value.isPressed);
+		// }
 #endif
 
 

@@ -232,7 +232,7 @@
                     "name": "",
                     "id": "60bebe21-853a-4fe2-b8a5-304a45ed0c42",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": ";KeyboardMouse",
                     "action": "Shield",
