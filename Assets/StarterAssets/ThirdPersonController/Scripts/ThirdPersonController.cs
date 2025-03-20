@@ -90,8 +90,9 @@ namespace StarterAssets
         
         // Shield
         [Header("Shield")]
-        [SerializeField] private float _shieldDuration = 1f;
+        [SerializeField] private float _shieldDuration = 2f;
         [SerializeField] private GameObject _shieldModel;
+        [SerializeField] private AudioClip _shieldAudioClip; // TODO: Remove
         private Coroutine _shieldCo;
 
         // timeout deltatime
@@ -369,7 +370,8 @@ namespace StarterAssets
         {
             Debug.Log($"Start shield coroutine");
             _shieldModel.SetActive(true);
-            // TODO: Play sound
+            // TODO: Play sound - Remove
+            AudioSource.PlayClipAtPoint(_shieldAudioClip, transform.TransformPoint(_controller.center), 1f);
             yield return new WaitForSeconds(_shieldDuration);
             _shieldModel.SetActive(false);
             _input.shield = false;
