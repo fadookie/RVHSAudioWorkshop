@@ -30,7 +30,6 @@ namespace StarterAssets
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
 
-        public AudioSource JumpAudioSource; // TODO: Remove
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
         [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
@@ -92,10 +91,8 @@ namespace StarterAssets
         
         // Shield
         [Header("Shield")]
-        [SerializeField] private AudioSource _sfxSource; // TODO: Remove
         [SerializeField] private float _shieldDuration = 2f;
         [SerializeField] private GameObject _shieldModel;
-        [SerializeField] private AudioClip _shieldAudioClip; // TODO: Remove
         private Coroutine _shieldCo;
 
         // timeout deltatime
@@ -373,8 +370,7 @@ namespace StarterAssets
         {
             Debug.Log($"Start shield coroutine");
             _shieldModel.SetActive(true);
-            // TODO: Play sound - Remove
-            _sfxSource.PlayOneShot(_shieldAudioClip);
+            // TODO: Play sound
             yield return new WaitForSeconds(_shieldDuration);
             _shieldModel.SetActive(false);
             _input.shield = false;
@@ -418,9 +414,8 @@ namespace StarterAssets
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
-                // AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
-                // Jump sound. TODO: Remove
-                JumpAudioSource.Play();
+                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                // TODO: Play custom jump sound instead.
             }
         }
     }

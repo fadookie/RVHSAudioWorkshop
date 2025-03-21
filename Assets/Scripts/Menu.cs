@@ -1,18 +1,24 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    const string MasterVolParam = "masterVol";
+    
     [SerializeField] private Slider _mainSlider;
-    [SerializeField] private AudioMixer _mainMixer;
+
+    private readonly Dictionary<string, float> _mockMixer = new() // TODO: Replace with a real mixer!
+    {
+        [MasterVolParam] = 0f,
+    };
 
     // Update is called once per frame
     void Update()
     {
         const int MixerVolumeChangeDeltaDb = 10;
-        const string MasterVolParam = "masterVol";
         
         if (Input.GetKeyDown("-"))
         {
@@ -29,17 +35,17 @@ public class Menu : MonoBehaviour
         
         void ModifyMixerVolume(string mixerParam, int delta)
         {
-            _mainMixer.GetFloat(mixerParam, out var volume);
+            var volume = _mockMixer[mixerParam];
             var newVolume = volume + delta;
             newVolume = Math.Clamp(newVolume, -80, 20);
             if (Mathf.Approximately(newVolume, volume)) return;
             Debug.Log($"ModifyMixerVolume changing {mixerParam} to {newVolume} dB");
-            _mainMixer.SetFloat(mixerParam, newVolume);
+            _mockMixer[mixerParam] = newVolume;
         }
 
         void UpdateMixerUI(string mixerParam, Slider slider)
         {
-            _mainMixer.GetFloat(mixerParam, out var volume);
+            var volume = _mockMixer[mixerParam];
             var normalizedVolume = Mathf.InverseLerp(-80f, 20f, volume);
             slider.value = normalizedVolume;
         }
