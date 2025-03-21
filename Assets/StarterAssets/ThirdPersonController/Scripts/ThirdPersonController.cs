@@ -92,7 +92,7 @@ namespace StarterAssets
         
         // Shield
         [Header("Shield")]
-        private AudioSource _sfxSource; // TODO: Remove
+        [SerializeField] private AudioSource _sfxSource; // TODO: Remove
         [SerializeField] private float _shieldDuration = 2f;
         [SerializeField] private GameObject _shieldModel;
         [SerializeField] private AudioClip _shieldAudioClip; // TODO: Remove
@@ -141,8 +141,6 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
-
-            _sfxSource = gameObject.AddComponent<AudioSource>();
         }
 
         private void Start()
