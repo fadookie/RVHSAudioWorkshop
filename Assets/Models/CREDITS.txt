@@ -1,0 +1,3 @@
+Fountain model from https://opengameart.org/content/medieval-fountains by AnyRPG,
+Derivative of https://blendswap.com/blend/2537 by Wade.
+License: CC0
